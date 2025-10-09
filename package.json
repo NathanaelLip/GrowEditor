@@ -9,7 +9,7 @@
     "dev:frontend": "cd frontend && npm run dev",
     "dev": "concurrently \"npm:dev:backend\" \"npm:dev:frontend\"",
     "build": "cd frontend && npm run build",
-    "start": "npm run build && node backend/index.js"
+    "start": "node backend/index.js"
   },
   "dependencies": {
     "@fastify/static": "^7.0.4",
