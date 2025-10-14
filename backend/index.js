@@ -11,12 +11,11 @@ fastify.addHook('onReady', async () => {
     try {
         // Initialize the database connection
         db = await sqlite.open({
-            filename: './groweditor.sqlite', // File where data is stored
+            filename: './groweditor.sqlite',
             driver: sqliteDriver.Database
         });
 
         // 1. Create the documents table if it doesn't exist.
-        // The titleText is now set as UNIQUE to enable the ON CONFLICT clause in the save route.
         await db.run(`
             CREATE TABLE IF NOT EXISTS documents (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,14 +39,10 @@ fastify.addHook('onReady', async () => {
         }
 
         // 3. Database Migration Step B: Ensure the UNIQUE index exists on titleText.
-        // This is crucial for the ON CONFLICT clause to work if the table was created without the UNIQUE constraint.
         try {
-             // IF NOT EXISTS prevents errors if the index already exists.
-             // Note: This will fail if there are existing rows with identical titleText values.
             await db.run(`CREATE UNIQUE INDEX IF NOT EXISTS idx_titleText ON documents (titleText)`);
             fastify.log.info('Database Migration: Ensured UNIQUE index on titleText.');
         } catch (e) {
-            // Warn the user if the index couldn't be created (likely due to pre-existing duplicates)
             fastify.log.warn('Database Warning: Could not create unique index on titleText. Overwrite logic may fail for duplicate titles.', e.message);
         }
 

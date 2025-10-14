@@ -169,7 +169,7 @@ const headerSections = {
 // --- Local Storage State and Setup ---
 const LOCAL_STORAGE_KEY = 'growEditorDraft';
 // This ref is used purely to trigger the 'watch' deep change detector
-const editorDraft = ref(null); 
+const editorDraft = ref(null);
 
 /**
  * Saves the entire editor state (sections and headers) to localStorage.
@@ -198,7 +198,7 @@ const loadDraftFromLocalStorage = () => {
     const draftString = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (draftString) {
       const draftPayload = JSON.parse(draftString);
-      
+
       // Load header content back into the reactive refs
       title.value.content = draftPayload.title || createEmptyContent();
       bigidea.value.content = draftPayload.bigidea || createEmptyContent();
@@ -210,7 +210,7 @@ const loadDraftFromLocalStorage = () => {
 
       console.info('Draft loaded from localStorage.');
       // Initialize the watch ref with the loaded content
-      editorDraft.value = draftPayload; 
+      editorDraft.value = draftPayload;
     }
   } catch (e) {
     console.error('Could not load draft from localStorage. Data might be corrupted.', e);
@@ -223,8 +223,8 @@ const loadDraftFromLocalStorage = () => {
  * Clears the local storage draft. Called after successful server saves or loads.
  */
 const clearDraft = () => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY);
-    console.info('Local draft cleared.');
+  localStorage.removeItem(LOCAL_STORAGE_KEY);
+  console.info('Local draft cleared.');
 };
 
 // Watcher to auto-save the draft whenever sections or header contents change
@@ -245,7 +245,7 @@ const resetDocument = () => {
   // Reset header sections with default text
   // The Title uses createEmptyContent() and relies on the component's placeholder for text,
   // which solves the spacing issue.
-  title.value.content = createEmptyContent(); 
+  title.value.content = createEmptyContent();
   bigidea.value.content = createTiptapContent("BIG IDEA", 'heading', { level: 2 });
   bible.value.content = createTiptapContent("BIBLE", 'heading', { level: 2 });
   about.value.content = createTiptapContent("ABOUT THE WEEK", 'heading', { level: 2 });
@@ -255,14 +255,14 @@ const resetDocument = () => {
 
   // Clear the local storage draft
   clearDraft();
-  
+
   // Update the draft ref to ensure all dependent components (Tiptap) react to the new state
-  editorDraft.value = { 
-      title: title.value.content, 
-      bigidea: bigidea.value.content, 
-      bible: bible.value.content, 
-      about: about.value.content, 
-      sections: []
+  editorDraft.value = {
+    title: title.value.content,
+    bigidea: bigidea.value.content,
+    bible: bible.value.content,
+    about: about.value.content,
+    sections: []
   };
   console.info('Editor content has been reset with starter text.');
 };
@@ -291,15 +291,15 @@ const updateSectionContent = (id, newContent) => {
 
   if (targetSection) {
     targetSection.content = newContent; // Store the Tiptap JSON
-    
+
     // Trigger the watch function by creating a new object reference 
-    editorDraft.value = { 
-        title: title.value.content, 
-        bigidea: bigidea.value.content, 
-        bible: bible.value.content, 
-        about: about.value.content, 
-        // We use .map to create shallow copies of sections to ensure deep watch picks up array changes
-        sections: sections.value.map(s => ({ ...s }))
+    editorDraft.value = {
+      title: title.value.content,
+      bigidea: bigidea.value.content,
+      bible: bible.value.content,
+      about: about.value.content,
+      // We use .map to create shallow copies of sections to ensure deep watch picks up array changes
+      sections: sections.value.map(s => ({ ...s }))
     };
   } else {
     // This case should ideally not happen if all components emit content with a valid ID/key
@@ -417,7 +417,7 @@ const deleteDocument = async (id, title) => {
   // Instead, you'd use a custom modal for confirmation. Since a custom modal UI is not 
   // currently available in this single-file component, we'll log a warning.
   console.warn("Custom confirmation needed. Proceeding with deletion for demonstration.");
-  
+
   try {
     // Send DELETE request to the backend
     const response = await fetch(`/api/documents/${id}`, {
@@ -462,7 +462,7 @@ const loadDocument = async (id) => {
 
       console.info(`Document ID ${id} loaded successfully.`);
       closeLoadModal(); // Close modal after successful load
-      
+
       // Clear the draft after successfully loading a server document
       clearDraft();
     } else {
@@ -527,7 +527,7 @@ const addSection = (defaultColor) => {
     id: uid(),
     color: defaultColor,
     // FIX: Use createTiptapContent with a starter paragraph for new sections
-    content: createTiptapContent("PASTEHERE", 'heading', { level: 3 }), 
+    content: createTiptapContent("PASTEHERE", 'heading', { level: 3 }),
   });
   // Trigger auto-save
   editorDraft.value = { sections: sections.value.map(s => ({ ...s })) };
@@ -561,16 +561,6 @@ const printDocument = () => {
 };
 </script>
 
-<style scoped>
-@import url(editor.css);
-
-/* Optional simple styling for the new button if editor.css doesn't cover it */
-.btn-reset {
-  background-color: #f44336; /* Red color for caution */
-  color: white;
-}
-
-.btn-reset:hover {
-  background-color: #d32f2f;
-}
+<style scoped lang="scss">
+@import url(editor.scss);
 </style>

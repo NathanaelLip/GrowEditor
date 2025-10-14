@@ -81,7 +81,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url(tiptap.scss);
+@import url(./scss/tiptap.scss);
 
 .space {
     background: var(--light-gray);

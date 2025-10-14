@@ -6,19 +6,12 @@ const routes = [
   {
     path: '/',
     name: 'Editor',
-    component: Editor, // The component to render for the root path
+    component: Editor,
   },
-  // You can add more routes here later, e.g.:
-  // {
-  //   path: '/about',
-  //   name: 'About',
-  //   component: () => import('../views/About.vue'),
-  // },
 ]
 
 // Create the router instance
 const router = createRouter({
-  // Use HTML5 history mode for clean URLs (no #)
   history: createWebHistory(),
   routes,
 })

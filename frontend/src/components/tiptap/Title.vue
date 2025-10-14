@@ -71,20 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url(tiptap.scss);
-
-// .grow-title {
-//     background-image: url(https://uc4cc5ad2d7e1356ba57ad70072f.previews.dropboxusercontent.com/p/thumb/ACw_2ojdqJ2EW7P696E1hVQ2pg4vnc_pwMg67FD7BS5OdOlIXmNRWPn9dG6inLFNVlrlJzu8lma8UKA8iC-Kp3eP8l2jg6AzjXzHmkn1ZFNLCzxP_CUnVUiuJ01NZ4X7-Evlz4Vq2UnnuT0jmOWRfeW3llmtEs22k2SyS9QPpCpZQ_QzYzQhRUeCs1XQg7tQoLbKUXTTi10T6YcWhuhKkhjuEOhbFXJE0dhZSvY59W6XLsLJW8mk6LjZNJ5Je3DboKW6XR2vhSesfEZ8XRN4rlXbqnfwHKWT1SZmVommyXBCEqC49Nt7t7YaqivhWk-SHVZYCE04XdyvZxwigXIMGuL9OOZUjxKohFPhzP97xmo8OQ/p.png);
-//     background-position-y: bottom;
-//     background-size: cover;
-//     print-color-adjust: exact;
-// }
-
-// .grow-title .tiptap {
-//     height: 162px;
-//     text-align: end;
-//     align-content: center;
-// }
+@import url(./scss/tiptap.scss);
 
 .grow-title .tiptap p {
     // color: var(--white);

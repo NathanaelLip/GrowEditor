@@ -253,5 +253,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import url(./tiptap/tiptap.scss);
+@import url(./tiptap/scss/tiptap.scss);
 </style>
